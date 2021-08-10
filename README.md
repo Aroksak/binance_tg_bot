@@ -14,7 +14,7 @@ Telegram bot for checking pulse on Binance
   "earn_file": "earn.csv" // Add this line if you want to monitor your staking crypto, otherwise just remove it.
 }
 ```
-- If you want to track crypto is staking (Binance's "Earn" page) create earn.csv with your current staking coins. Unfortunately Binance API provides no way to aquire this information automatically. Example:
+- If you want to track crypto in staking (Binance's "Earn" page) create earn.csv with your current staking coins. Unfortunately Binance API provides no way to aquire this information automatically. Example:
 ```
 coin,amount,start_date,end_date
 ADA,100,2021-08-01,2021-09-01
