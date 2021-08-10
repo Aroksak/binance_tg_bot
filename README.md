@@ -3,6 +3,7 @@ Telegram bot for checking pulse on Binance
 
 # How to use:
 - Clone the repo.
+- Create new telegram bot via @BotFather.
 - Create file config.json in the main directory with the following content:
 ```
 {
