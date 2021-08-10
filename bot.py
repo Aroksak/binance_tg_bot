@@ -7,10 +7,10 @@ from binance_api import MyWallet, history_to_png
 
 
 class BinanceBot:
-    def __init__(self, binance_key, binance_secret, telegram_key, user_id):
+    def __init__(self, binance_key, binance_secret, telegram_key, user_id, earn_file=None):
         self.wallet = MyWallet(key=binance_key,
                                secret=binance_secret,
-                               earn_file='earn.csv', history_file='history.csv')
+                               earn_file=earn_file, history_file='history.csv')
         self.updater = Updater(token=telegram_key, use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.job_queue = self.updater.job_queue
