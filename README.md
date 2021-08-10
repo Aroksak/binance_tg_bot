@@ -25,7 +25,7 @@ ETH,0.334,2021-08-30,2021-12-12
 # Commands:
 Currently bot supports two commands:
 - /stats
-Prints total sum of your binance wallet in USDT and BTC, send image with info for all possesed coins.
+Prints total sum of your binance wallet in USDT and BTC, sends image with info for all possesed coins.
 - /history
 Sends plot of you totals in USDT and BTC over time you used the bot.
 
