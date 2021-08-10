@@ -10,10 +10,11 @@ Telegram bot for checking pulse on Binance
   "binance_key": %YOUR_BINANCE_API_KEY%,
   "binance_secret": %YOU_BINANCE_SECRET_API_KEY%,
   "telegram_key": %TELEGRAM_BOT_API_KEY_FROM_@BotFather%,
-  "user_id" %YOU_TELEGRAM_USER_ID%: 
+  "user_id": %YOU_TELEGRAM_USER_ID%,
+  "earn_file": "earn.csv" // Add this line if you want to monitor your staking crypto, otherwise just remove it.
 }
 ```
-- Create earn.csv with your current staking coins. Unfortunately Binance API provides no way to aquire this information automatically. Example:
+- If you want to track crypto is staking (Binance's "Earn" page) create earn.csv with your current staking coins. Unfortunately Binance API provides no way to aquire this information automatically. Example:
 ```
 coin,amount,start_date,end_date
 ADA,100,2021-08-01,2021-09-01
