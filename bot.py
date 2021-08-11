@@ -1,16 +1,21 @@
 import json
+import logging
 
+from binance.spot import Spot
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, Filters, CallbackContext
 
-from binance_api import MyWallet, history_to_png
+from binance_api import MyWallet, history_to_png, TokenMonitor
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 class BinanceBot:
     def __init__(self, binance_key, binance_secret, telegram_key, user_id, earn_file=None):
-        self.wallet = MyWallet(key=binance_key,
-                               secret=binance_secret,
-                               earn_file=earn_file, history_file='history.csv')
+        client = Spot(key=binance_key, secret=binance_secret)
+        self.wallet = MyWallet(client=client, earn_file=earn_file, history_file='history.csv')
+        self.tm = TokenMonitor(client=client)
         self.updater = Updater(token=telegram_key, use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.job_queue = self.updater.job_queue
@@ -21,6 +26,8 @@ class BinanceBot:
         self.dispatcher.add_handler(CommandHandler("stats", self.send_standard_stats,
                                                    Filters.user(user_id=self.user_id)))
         self.dispatcher.add_handler(CommandHandler("history", self.send_history_plot,
+                                                   Filters.user(user_id=self.user_id)))
+        self.dispatcher.add_handler(CommandHandler("chart", self.send_token_chart,
                                                    Filters.user(user_id=self.user_id)))
 
     def send_standard_stats(self, update: Update, context: CallbackContext):
@@ -35,6 +42,20 @@ class BinanceBot:
     def send_history_plot(self, update, context):
         history_to_png("history.csv", "history.png")
         context.bot.send_photo(chat_id=self.user_id, photo=open("history.png", 'rb'))
+
+    def send_token_chart(self, update, context):
+        token = context.args[0]
+        try:
+            self.tm.get_token_chart(token, "chart.png")
+            context.bot.send_photo(
+                chat_id=self.user_id,
+                photo=open("chart.png", 'rb')
+            )
+        except ValueError:
+            context.bot.send_message(
+                chat_id=self.user_id,
+                text=f"Token {token} not found on Binance."
+            )
 
     def serve_forever(self):
         self.updater.start_polling()

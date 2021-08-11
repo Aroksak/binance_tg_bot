@@ -3,11 +3,12 @@ import os
 import pandas as pd
 from binance.spot import Spot
 from dataframe_image import export
+from pandas._typing import FilePathOrBuffer
 
 
 class MyWallet:
-    def __init__(self, key, secret, history_file, earn_file=None):
-        self.client = Spot(key=key, secret=secret)
+    def __init__(self, client: Spot, history_file: FilePathOrBuffer, earn_file=None):
+        self.client = client
         self.earn_file = earn_file
         self.history_file = history_file
         self.update()
