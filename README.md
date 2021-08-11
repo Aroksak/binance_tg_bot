@@ -29,8 +29,10 @@ Currently bot supports two commands:
 Prints total sum of your binance wallet in USDT and BTC, sends image with info for all possesed coins.
 - /history
 Sends plot of you totals in USDT and BTC over time you used the bot.
+- /chart %TOKEN%
+Sends candle plot of provided token-pair. Data is for last 24 hours, with candles 15 minutes wide.
 
 # TODO:
 - add daily update on stats
 - add command to update earn.csv via the bot
-- add command to get plot for any token
+- ~~add command to get plot for any token~~
