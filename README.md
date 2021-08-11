@@ -24,7 +24,7 @@ ETH,0.334,2021-08-30,2021-12-12
 - Run bot.py, probably you would like to host it somewhere to run full-time.
 
 # Commands:
-Currently bot supports two commands:
+Currently bot supports the following commands:
 - /stats
 Prints total sum of your binance wallet in USDT and BTC, sends image with info for all possesed coins.
 - /history
